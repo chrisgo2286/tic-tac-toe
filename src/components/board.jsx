@@ -3,14 +3,14 @@ import Square from './square';
 
 class Board extends Component {
     render() {
-      console.log(this.props.squares)
       return (
         <React.Fragment>
           <h3>Tic Tac Toe</h3>
-          <div className='board'>{ this.props.squares.map((square, ndx) => (
+          <div className='board'>{ this.props.squares.map((square) => (
             <Square
-              key={ndx}
-              content={square.content}
+              key={square.id}
+              square={square}
+              onClick={this.props.onClick}
             />
           ))}
           </div>
