@@ -23,8 +23,8 @@ class App extends Component {
     if(this.invalidMove(id)) {
       return;
     }
-
-    const squares = this.enterMove(id);
+    const squares = [...this.state.squares]
+    squares[id-1].content = this.state.currentPlayer;
     const currentPlayer = this.changePlayer();
     this.setState({ currentPlayer, squares })
     this.changePlayer();
@@ -32,23 +32,7 @@ class App extends Component {
 
   invalidMove = (id) => {
     const squares = [...this.state.squares]
-    for(var i=0; i<9; i++) {
-      if(squares[i].id === id) {
-        if(squares[i].content !== '') {
-          return true;
-        }
-      }
-    }
-  }
-
-  enterMove = (id) => {
-    const squares = [...this.state.squares]
-    for(var i=0; i<9; i++) {
-      if(squares[i].id === id) {
-        squares[i].content = this.state.currentPlayer;
-        return squares;
-      }
-    }
+    return (squares[id-1].content !== '') ? true : false;
   }
 
   changePlayer = () => {
